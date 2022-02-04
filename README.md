@@ -1,40 +1,22 @@
-# create-svelte
+# Shadow Endpoints broken on Browser Back navigation
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Steps to reproduce:
 
-## Creating a project
+- pnpm install
+- pnpm dev
+- open http://localhost:3000/
+- click on Todos
+- Navigate back with the default browser back button
 
-If you're seeing this, you've probably already done this step. Congrats!
+The error is cause because the browser tries to fetch http://__data.json/.
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
-
-# create a new project in my-app
-npm init svelte@next my-app
 ```
-
-> Note: the `@next` is temporary
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+500
+Failed to fetch
+TypeError: Failed to fetch
+    at Renderer._load (http://localhost:3000/@fs/Users/info/Desktop/DEV/shadow-endpoints/.svelte-kit/runtime/client/start.js:1269:25)
+    at async Renderer._get_navigation_result (http://localhost:3000/@fs/Users/info/Desktop/DEV/shadow-endpoints/.svelte-kit/runtime/client/start.js:999:19)
+    at async Renderer.update (http://localhost:3000/@fs/Users/info/Desktop/DEV/shadow-endpoints/.svelte-kit/runtime/client/start.js:831:27)
+    at async Renderer.handle_navigation (http://localhost:3000/@fs/Users/info/Desktop/DEV/shadow-endpoints/.svelte-kit/runtime/client/start.js:820:3)
+    at async Router._navigate (http://localhost:3000/@fs/Users/info/Desktop/DEV/shadow-endpoints/.svelte-kit/runtime/client/start.js:413:3)
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment.
